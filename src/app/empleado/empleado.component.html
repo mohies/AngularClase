@@ -1,4 +1,12 @@
-<strong>EMpleado estrella</strong>
+<strong>Empleado estrella</strong>
 <ul>
     <li>{{empleado.nombre}} y el Salario es {{empleado.edad}}</li>
+</ul>
+
+<ul>
+    @if(trabajadorExterno){
+        <li>{{empleadoExt.nombre}}</li>
+    }@else{
+        <li>Lista de trabajadores internos</li>
+    }
 </ul>

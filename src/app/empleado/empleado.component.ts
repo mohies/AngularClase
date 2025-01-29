@@ -8,10 +8,19 @@ import { Empleado } from './Empleado';
 })
 export class EmpleadoComponent {
   public title = "Bienvenido Empleado";
+  public empleadoExt: Empleado;
+  public trabajador: Array<any>;
+  public trabajadorExterno:boolean;
   public empleado: Empleado;  // Asegúrate de que este es el tipo correcto
 
   constructor() {
     this.empleado = new Empleado('Juan Pérez', 47);
+    this.empleadoExt= new Empleado("Pedro",47)
+    this.trabajador=[new Empleado("Marta",47),
+                     new Empleado("Ana",43),
+                     new Empleado("Alejandro",38)
+    ]
+    this.trabajadorExterno=true;
   }
 
   ngOnInit() {
