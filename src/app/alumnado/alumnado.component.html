@@ -1,0 +1,22 @@
+@for (alumno of alumnadoDaw; track alumno){
+    @if(alumno.curso ==1){
+        <strong>Alumno del primer curso</strong>
+        <p>{{alumno.nombre}}</p>
+    }@else{
+        <strong>Segundo curso</strong>
+        <p>{{alumno.nombre}}</p>
+    }
+}
+<button (click)="cargarAlumnos(1)">Primer Curso</button>
+<button (click)="cargarAlumnos(2)">Segundo Curso</button>
+
+<div>
+    @for (alumno of alumnadoDaw; track alumno) {
+        @if (alumno.curso === cursoSeleccionado) {
+            <div>
+                <strong>Curso {{alumno.curso}}</strong>
+                <p>{{alumno.nombre}}</p>
+            </div>
+        }
+    }
+</div>
