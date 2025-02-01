@@ -1,6 +1,79 @@
-<div class="text-center">
-    <h1>Bienvenido a la página principal</h1>
-    <p>Esta es la sección de inicio.</p>
-    <button class="btn btn-primary" routerLink="/empleado">Ver empleados</button>
+<div class="container text-center">
+  <h1>Bienvenido a la página de One Piece</h1>
+  <p>Descubre más sobre los personajes y las aventuras de One Piece.</p>
+
+  <!-- Carrusel de imágenes de One Piece -->
+  <div id="onePieceCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="img/1331108.jpeg" class="d-block w-100" alt="Luffy">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Luffy, el Capitán</h5>
+          <p>El joven soñador que quiere encontrar el One Piece.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="img/roronoa-zoro-hfxnwuxph7uv5tsu.jpg" class="d-block w-100" alt="Zoro">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Zoro, el Espadachín</h5>
+          <p>El experto espadachín que busca ser el mejor del mundo.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="img/portada_one-piece.jpg" class="d-block w-100" alt="Nami">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Nami, la Navegante</h5>
+          <p>La navegante con una gran habilidad para la cartografía.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles del carrusel -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#onePieceCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#onePieceCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  
+
+  <div class="my-4">
+    <h2>Elementos Destacados</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/mapa.png" class="card-img-top card-img-size" alt="One Piece World">
+          <div class="card-body">
+            <h5 class="card-title">Mundo de One Piece</h5>
+            <p class="card-text">Un mundo lleno de islas, aventuras y un tesoro legendario: el One Piece.</p>
+            <a href="#" class="btn btn-primary">Explorar más</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/almirantes.jpg" class="card-img-top card-img-size" alt="Marines">
+          <div class="card-body">
+            <h5 class="card-title">Los Marines</h5>
+            <p class="card-text">El ejército mundial luchando para mantener el orden y la justicia.</p>
+            <a href="#" class="btn btn-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img/rev.jpg" class="card-img-top card-img-size" alt="Revolucionarios">
+          <div class="card-body">
+            <h5 class="card-title">Los Revolucionarios</h5>
+            <p class="card-text">Un grupo rebelde que lucha contra el gobierno mundial.</p>
+            <a href="#" class="btn btn-primary">Descubrir más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" routerLink="/empleado">Ver empleados</button>
+</div>

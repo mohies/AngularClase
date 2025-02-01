@@ -1,0 +1,45 @@
+/* Estilo One Piece para la barra de navegación */
+.custom-navbar {
+    background: linear-gradient(45deg, #000, #222); /* Fondo oscuro degradado */
+    border-bottom: 4px solid #f1c40f; /* Línea dorada en la parte inferior */
+    font-family: 'Pirata One', sans-serif; /* Fuente estilo One Piece */
+  }
+  
+  /* Logo de la Navbar */
+  .navbar-logo {
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  /* Estilos de los enlaces */
+  .custom-link {
+    color: #f1c40f !important; /* Color dorado */
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    font-size: 1.2rem;
+  }
+  
+  .custom-link:hover {
+    color: #e0a800 !important; /* Dorado más oscuro al pasar el mouse */
+    text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.7); /* Efecto de brillo dorado */
+    transform: scale(1.1); /* Ligero aumento al pasar el mouse */
+  }
+  
+  /* Botón hamburguesa */
+  .navbar-toggler {
+    border-color: #f1c40f;
+  }
+  
+  .navbar-toggler-icon {
+    filter: invert(85%);
+  }
+  
+  /* Navbar activo */
+  .navbar-nav .nav-link.active {
+    color: white !important;
+    background-color: #f1c40f !important;
+    border-radius: 10px;
+    padding: 5px 10px;
+  }
+  

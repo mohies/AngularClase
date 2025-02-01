@@ -1,0 +1,55 @@
+/* Carrusel */
+.carousel-item {
+    position: relative;
+  }
+  
+  /* Fondo y estilo del texto sobre la imagen */
+  .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con algo de transparencia */
+    color: #f1c40f; /* Color dorado estilo One Piece */
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  .carousel-caption h5 {
+    font-size: 2rem; /* Tamaño de letra grande */
+    font-weight: bold; /* Negrita */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para el texto */
+  }
+  
+  .carousel-caption p {
+    font-size: 1.2rem; /* Tamaño de letra de los párrafos */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Sombra para el texto */
+  }
+  
+  /* Estilo para las imágenes del carrusel */
+  .carousel-item img {
+    width: 100%; /* Para asegurar que la imagen ocupe el 100% del ancho */
+    height: 80vh; /* Hacer las imágenes más grandes */
+    object-fit: cover; /* Mantiene la proporción de la imagen sin distorsionar */
+  }
+  
+  /* Estilo para los elementos de la página */
+  h1, h2 {
+    color: #f1c40f; /* Color dorado estilo One Piece */
+    font-family: 'Pirata One', sans-serif; /* Fuente personalizada estilo One Piece */
+  }
+  
+  /* Estilo de los botones */
+  .btn-primary {
+    background-color: #f1c40f; /* Color dorado */
+    border: none;
+    color: black;
+  }
+  
+  .btn-primary:hover {
+    background-color: #e0a800; /* Color dorado más oscuro al pasar el ratón */
+  }
+  
+  /* Asegurando que las imágenes de los cards sean del mismo tamaño */
+  .card-img-size {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
