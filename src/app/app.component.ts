@@ -1,5 +1,6 @@
+// app.component.ts
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router'; // Importa RouterModule
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { EmpleadoComponent } from './empleado/empleado.component';
 import { AlumnadoComponent } from './alumnado/alumnado.component';
 import { MenuComponent } from './menu/menu.component';
@@ -22,7 +23,5 @@ import { HomeComponent } from './home/home.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title(title: any) {
-    throw new Error('Method not implemented.');
-  }
+  title = 'Mi Aplicación Angular';
 }
