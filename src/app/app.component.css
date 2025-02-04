@@ -2,7 +2,7 @@
 .custom-navbar {
     background: linear-gradient(45deg, #000, #222); /* Fondo oscuro degradado */
     border-bottom: 4px solid #f1c40f; /* Línea dorada en la parte inferior */
-    font-family: 'Pirata One', sans-serif; /* Fuente estilo One Piece */
+    font-family: 'Luckiest Guy', cursive;
   }
   
   /* Logo de la Navbar */
@@ -42,4 +42,6 @@
     border-radius: 10px;
     padding: 5px 10px;
   }
+  
+
   

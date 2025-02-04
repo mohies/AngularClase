@@ -1,21 +1,16 @@
-// app.component.ts
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { EmpleadoComponent } from './empleado/empleado.component';
-import { AlumnadoComponent } from './alumnado/alumnado.component';
-import { MenuComponent } from './menu/menu.component';
+import { CharactersListComponent } from './characters-list/characters-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,  
+  standalone: true,
   imports: [
     RouterModule, 
     RouterOutlet, 
-    EmpleadoComponent,
-    AlumnadoComponent,
-    MenuComponent,
+    CharactersListComponent, // Nuevo Componente
     FooterComponent,
     HomeComponent
   ],  

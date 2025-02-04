@@ -6,7 +6,7 @@ import { map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class OnepieceService {
+export class SimpsonsService {
   // Define la URL de la API que se usará para obtener los personajes de One Piece
   private apiUrl = 'https://apisimpsons.fly.dev/api/personajes?limit=400';
 

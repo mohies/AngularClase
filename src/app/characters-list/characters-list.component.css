@@ -1,0 +1,61 @@
+/* 🏡 Título principal con fuente Simpsons */
+.simpsons-title {
+  font-family: 'Luckiest Guy', cursive;
+  color: #FFD90F; /* Amarillo Simpsons */
+  text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); /* Sombra negra para mayor contraste */
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 🎯 Subtítulos dentro de las tarjetas */
+.card-title {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.5rem;
+  color: #FFD90F; /* Amarillo Simpsons */
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* 📝 Texto dentro de las tarjetas */
+.card-text {
+  font-family: 'Arial', sans-serif; /* Fuente más legible para párrafos */
+  font-size: 1.1rem;
+  color: #fff; /* Blanco para contraste */
+  background: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
+  padding: 5px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* 🎭 Contenedor de imagen para que no se deforme */
+.image-container {
+  width: 100%;
+  height: 250px; /* Tamaño fijo para todas las imágenes */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #f8f9fa; /* Fondo gris claro si la imagen es pequeña */
+}
+
+/* 🖼️ Imágenes sin deformación */
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 🔥 Mantiene la imagen completa sin recortar */
+}
+
+/* 💛 Botón Simpsons */
+.btn-simpsons {
+  background-color: #FFD90F;
+  color: black;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.btn-simpsons:hover {
+  background-color: #F4A900;
+}

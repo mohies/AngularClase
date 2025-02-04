@@ -1,27 +1,27 @@
 <div class="container text-center">
-  <h1>Bienvenido a la página de Los Simpsons</h1>
-  <p>Descubre más sobre los personajes y las aventuras de la familia Simpson.</p>
+  <h1 class="simpsons-title">🏡 Bienvenido a Springfield</h1>
+  <p class="simpsons-subtitle">Descubre más sobre los personajes y las aventuras de la familia Simpson.</p>
 
-  <!-- Carrusel de imágenes de Los Simpsons -->
+  <!-- Carrusel Mejorado -->
   <div id="simpsonsCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="img/homer_simpson.jpg" class="d-block w-100" alt="Homer Simpson">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-overlay">
           <h5>Homer Simpson</h5>
           <p>El cabeza de familia que siempre está en busca de aventuras... o de cerveza.</p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="img/marge_simpson.jpg" class="d-block w-100" alt="Marge Simpson">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-overlay">
           <h5>Marge Simpson</h5>
           <p>La madre y esposa que siempre mantiene a la familia unida.</p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="img/bart_simpson.jpg" class="d-block w-100" alt="Bart Simpson">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-overlay">
           <h5>Bart Simpson</h5>
           <p>El travieso hijo que siempre está metido en problemas.</p>
         </div>
@@ -30,17 +30,15 @@
 
     <!-- Controles del carrusel -->
     <button class="carousel-control-prev" type="button" data-bs-target="#simpsonsCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
+      <span class="carousel-control-prev-icon"></span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#simpsonsCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
+      <span class="carousel-control-next-icon"></span>
     </button>
   </div>
 
   <div class="my-4">
-    <h2>Elementos Destacados</h2>
+    <h2 class="simpsons-title">⭐ Elementos Destacados</h2>
     <div class="row">
       <div class="col-md-4">
         <div class="card">
@@ -48,7 +46,6 @@
           <div class="card-body">
             <h5 class="card-title">La Ciudad de Springfield</h5>
             <p class="card-text">El hogar de los Simpsons y una ciudad llena de personajes interesantes.</p>
-            <a href="#" class="btn btn-primary">Explorar más</a>
           </div>
         </div>
       </div>
@@ -58,7 +55,6 @@
           <div class="card-body">
             <h5 class="card-title">Krusty Burger</h5>
             <p class="card-text">La famosa cadena de comida rápida que está llena de locuras.</p>
-            <a href="#" class="btn btn-primary">Ver más</a>
           </div>
         </div>
       </div>
@@ -68,12 +64,11 @@
           <div class="card-body">
             <h5 class="card-title">Policía de Springfield</h5>
             <p class="card-text">El cuerpo de policía dirigido por el incompetente Chief Wiggum.</p>
-            <a href="#" class="btn btn-primary">Descubrir más</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <button class="btn btn-primary" routerLink="/empleado">Ver empleados</button>
+  <button class="btn btn-simpsons mt-3" routerLink="/characters">👀 Ver Personajes</button>
 </div>

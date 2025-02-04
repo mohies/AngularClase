@@ -11,3 +11,10 @@ body {
     color: #f1c40f; 
   }
   
+/* Fondo de la página con las nubes de Los Simpsons */
+body {
+  background: url('../public/img/nubes.jpg') no-repeat center top;
+  background-size: cover;
+  min-height: 100vh;
+  font-family: 'Luckiest Guy', cursive;
+}
