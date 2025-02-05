@@ -1,29 +1,33 @@
-<nav class="navbar navbar-expand-lg custom-navbar">
+<nav class="navbar navbar-expand-lg custom-navbar bg-dark shadow-lg">
   <div class="container">
     <!-- Logo -->
-    <a class="navbar-brand" href="#">
-      <img src="img/logoo.png" alt="Los Simpsons Logo" class="navbar-logo">
+    <a class="navbar-brand text-light fw-bold" href="#">
+      <img src="img/logoo.png" alt="GameZone Logo" class="navbar-logo me-2" style="height: 50px;">
+      GAMEZONE
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link custom-link" routerLink="/home" routerLinkActive="active">🏠 Inicio</a>
+          <a class="nav-link text-light custom-link" routerLink="/home" routerLinkActive="active">🏠 Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link custom-link" routerLink="/characters" routerLinkActive="active">💛 Personajes</a>
+          <a class="nav-link text-light custom-link" routerLink="/Juegos" routerLinkActive="active">🎮 Juegos</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Aquí se renderizan dinámicamente los componentes -->
+<!-- Renderizado dinámico -->
 <div class="container mt-4">
   <router-outlet></router-outlet>
 </div>
 
-<!-- Footer siempre visible -->
-<app-footer></app-footer>
+<!-- Footer moderno -->
+<footer class="bg-dark text-light text-center py-3 mt-4">
+  <p class="mb-0">🎮 GameZone - Tu portal de videojuegos | &copy; 2025</p>
+  <p><a  class="text-light">Contacto</a> | <a  class="text-light">Política de privacidad</a></p>
+</footer>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { CharactersListComponent } from './characters-list/characters-list.component';
+import { GameListComponent } from './game-list/game-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 
@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
   imports: [
     RouterModule, 
     RouterOutlet, 
-    CharactersListComponent, // Nuevo Componente
+    GameListComponent, // Nuevo Componente
     FooterComponent,
     HomeComponent
   ],  
