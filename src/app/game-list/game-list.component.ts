@@ -12,11 +12,12 @@ export class GameListComponent implements OnInit {
   games: any[] = [];
   currentPage: number = 1;
   pageSize: number = 21;
+  searching: boolean = false;
 
   constructor(private rawgService: RawgService, private router: Router) { }
 
   ngOnInit(): void {
-// Método que carga los juegos desde el servicio rawgService
+    // Método que carga los juegos desde el servicio rawgService
 
     // Llamamos al método getGames del servicio rawgService.
     // Este método hace una petición HTTP para obtener una lista de juegos.
@@ -31,7 +32,7 @@ export class GameListComponent implements OnInit {
         this.games = response.results;
       });
   }
-  
+
   nextPage(): void {
     this.currentPage++;
 
@@ -43,7 +44,24 @@ export class GameListComponent implements OnInit {
     }
   }
 
-  verDetalles(gamesId:number){
-    this.router.navigate(["/game",gamesId])
+  verDetalles(gamesId: number) {
+    this.router.navigate(["/game", gamesId])
   }
+
+  buscarJuego(event: any): void {
+
+    const nombreJuego= event.target.value;
+    if (nombreJuego.trim() !== '') {
+      this.searching = true; // 🔄 Indicar que está en modo búsqueda
+      this.rawgService.filterJuego(nombreJuego,this.currentPage).subscribe(response => {
+        this.games = response.results;
+        console.log(response);
+      });
+    } else {
+      this.ngOnInit() // Si el campo está vacío, recarga la lista normal
+    }
+  }
+
+
+
 }
