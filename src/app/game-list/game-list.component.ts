@@ -11,33 +11,39 @@ import { RawgService } from '../servicio/rawg.service';
 export class GameListComponent implements OnInit {
   games: any[] = [];
   currentPage: number = 1;
-  pageSize: number = 20;
+  pageSize: number = 21;
 
-  constructor(private rawgService: RawgService, private router: Router) {}
+  constructor(private rawgService: RawgService, private router: Router) { }
 
   ngOnInit(): void {
-    this.loadGames();
-  }
+// Método que carga los juegos desde el servicio rawgService
 
-  loadGames(): void {
-    this.rawgService.getGames(this.currentPage, this.pageSize).subscribe(response => {
-      this.games = response.results;
-    });
-  }
+    // Llamamos al método getGames del servicio rawgService.
+    // Este método hace una petición HTTP para obtener una lista de juegos.
+    // Se le pasan como parámetros la página actual y el tamaño de la página.
+    this.rawgService.getGames(this.currentPage, this.pageSize)
 
+      // Nos suscribimos al observable, lo que significa que esperamos la respuesta de la API.
+      // Cuando la respuesta llega, ejecutamos la función dentro de subscribe.
+      .subscribe(response => {
+
+        // Extraemos los resultados de la respuesta y los guardamos en la variable 'games'.
+        this.games = response.results;
+      });
+  }
+  
   nextPage(): void {
     this.currentPage++;
-    this.loadGames();
+
   }
 
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.loadGames();
     }
   }
 
-  viewGameDetails(gameId: number): void {
-    this.router.navigate(['/game', gameId]);
+  verDetalles(gamesId:number){
+    this.router.navigate(["/game",gamesId])
   }
 }

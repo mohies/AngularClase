@@ -11,7 +11,7 @@ export class RawgService {
 
   constructor(private http: HttpClient) {}
 
-  getGames(page: number = 1, pageSize: number = 20): Observable<any> {
+  getGames(page: number, pageSize: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}&page=${page}&page_size=${pageSize}`);
   }
 

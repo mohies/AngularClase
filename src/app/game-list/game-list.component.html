@@ -2,7 +2,7 @@
     <div class="row">
         @for (game of games; track game.id) {
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-            <div class="card game-card shadow-lg" (click)="viewGameDetails(game.id)" style="cursor: pointer;">
+            <div class="card game-card shadow-lg" (click)="verDetalles(game.id)"  style="cursor: pointer;">
                 <img [src]="game.background_image" class="card-img-top" alt="{{ game.name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ game.name }}</h5>
