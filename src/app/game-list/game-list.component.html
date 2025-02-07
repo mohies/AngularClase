@@ -1,8 +1,14 @@
 <div class="container mt-4">
   <!-- 🔍 Input de búsqueda -->
-  <div class="mb-3">
-    <input type="text" class="form-control" 
+  <div class="mb-3 d-flex align-items-center">
+    <input type="text" class="form-control me-2" 
       placeholder="🔍 Buscar juegos..." (input)="buscarJuego($event)">
+
+    <select class="form-select" (change)="ordenarPor($event)">
+      <option value="nombre">🔠 Nombre</option>
+      <option value="rating">⭐ Rating</option>
+      <option value="metacritic">🎯 Metacritic</option>
+    </select>
   </div>
 
   <div class="row">
@@ -21,12 +27,9 @@
     }
   </div>
 
-  
-
-    <div class="page-controls">
-      <button class="btn btn-primary" (click)="prevPage()" [disabled]="currentPage === 1">⏮ Anterior</button>
-      <span class="fs-4 mx-3">Página {{ currentPage }}</span>
-      <button class="btn btn-primary" (click)="nextPage()">Siguiente ⏭</button>
-    </div>
-
+  <div class="page-controls">
+    <button class="btn btn-primary" (click)="prevPage()" [disabled]="currentPage === 1">⏮ Anterior</button>
+    <span class="fs-4 mx-3">Página {{ currentPage }}</span>
+    <button class="btn btn-primary" (click)="nextPage()">Siguiente ⏭</button>
+  </div>
 </div>
