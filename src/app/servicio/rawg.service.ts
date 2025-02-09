@@ -23,4 +23,13 @@ export class RawgService {
     const url = `https://api.rawg.io/api/games?key=e908d77142574a35945bc55e7711e385&page=${page}&search=${encodeURIComponent(nombreJuego)}`;
     return this.http.get<any>(url);
 }
+
+
+getGamesByPlatform(page: number, pageSize: number, platformId: string): Observable<any> {
+  const url = `https://api.rawg.io/api/games?key=e908d77142574a35945bc55e7711e385&page=${page}&page_size=${pageSize}&platforms=${platformId}`;
+  return this.http.get<any>(url);
+}
+
+
+
 }

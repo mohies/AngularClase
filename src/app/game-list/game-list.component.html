@@ -1,29 +1,36 @@
 <div class="container mt-4">
   <!-- 🔍 Input de búsqueda -->
   <div class="mb-3 d-flex align-items-center">
-    <input type="text" class="form-control me-2" 
-      placeholder="🔍 Buscar juegos..." (input)="buscarJuego($event)">
+    <input type="text" class="form-control me-2" placeholder="🔍 Buscar juegos..." (input)="buscarJuego($event)">
 
+    <!-- 🔄 Selector de Ordenación con opción deshabilitada -->
     <select class="form-select" (change)="ordenarPor($event)">
+      <option value="" disabled selected>📌 Selecciona un criterio</option>
       <option value="nombre">🔠 Nombre</option>
       <option value="rating">⭐ Rating</option>
       <option value="metacritic">🎯 Metacritic</option>
     </select>
+
   </div>
+@if (selectedPlatformImage) {
+  <div class="text-center mb-4">
+    <img [src]="selectedPlatformImage" alt="Plataforma seleccionada" class="platform-image">
+  </div>
+}
 
   <div class="row">
     @for (game of games; track game.id) {
-      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-        <div class="card game-card shadow-lg" (click)="verDetalles(game.id)" style="cursor: pointer;">
-          <img [src]="game.background_image" class="card-img-top" alt="{{ game.name }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ game.name }}</h5>
-            <p><strong>Lanzamiento:</strong> {{ game.released }}</p>
-            <p><strong>Metacritic:</strong> <span class="badge bg-success">{{ game.metacritic }}</span></p>
-            <p><strong>Valoración:</strong> <span class="badge bg-warning text-dark">⭐ {{ game.rating }}/5</span></p>
-          </div>
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+      <div class="card game-card shadow-lg" (click)="verDetalles(game.id)" style="cursor: pointer;">
+        <img [src]="game.background_image" class="card-img-top" alt="{{ game.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ game.name }}</h5>
+          <p><strong>Lanzamiento:</strong> {{ game.released }}</p>
+          <p><strong>Metacritic:</strong> <span class="badge bg-success">{{ game.metacritic }}</span></p>
+          <p><strong>Valoración:</strong> <span class="badge bg-warning text-dark">⭐ {{ game.rating }}/5</span></p>
         </div>
       </div>
+    </div>
     }
   </div>
 

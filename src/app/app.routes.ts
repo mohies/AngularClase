@@ -5,8 +5,9 @@ import { GameDetailsComponent } from './game-details/game-details.component';
 export const routes: Routes = [
   { path: '', component: HomeComponent }, // Página de inicio
   { path: 'home', component: HomeComponent },
-  { path: 'Juegos', component: GameListComponent }, // Página específica
+  { path: 'juegos', component: GameListComponent }, // Página específica
   { path: 'game/:id', component: GameDetailsComponent }
+  
 
   
 ];

@@ -1,9 +1,6 @@
-// game-list.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RawgService } from '../servicio/rawg.service';
-import { response } from 'express';
-import { debug } from 'console';
 
 @Component({
   selector: 'app-game-list',
@@ -15,98 +12,129 @@ export class GameListComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 21;
   searching: boolean = false;
-  ultimabusqueda: string='';
-  ordenActual: string='nombre'
+  ultimabusqueda: string = '';
+  ordenActual: string = '';
+  selectedPlatformImage: string = ''; // URL de la imagen de la plataforma
 
-  constructor(private rawgService: RawgService, private router: Router) { }
-
+  constructor(private rawgService: RawgService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const platformId = params['platform']; // Verifica si hay una plataforma en la URL
 
-    // Método que carga los juegos desde el servicio rawgService
-    // Llamamos al método getGames del servicio rawgService.
-    // Este método hace una petición HTTP para obtener una lista de juegos.
-    // Se le pasan como parámetros la página actual y el tamaño de la página.
-    this.rawgService.getGames(this.currentPage, this.pageSize)
+      if (platformId) {
+        // Si hay un parámetro de plataforma, carga juegos de esa plataforma
+        this.rawgService.getGamesByPlatform(this.currentPage, this.pageSize, platformId)
+          .subscribe(response => {
+            this.games = response.results;
+            if (this.ordenActual) {
+              this.ordenarPor(this.ordenActual);
+            }
+          });
 
-      // Nos suscribimos al observable, lo que significa que esperamos la respuesta de la API.
-      // Cuando la respuesta llega, ejecutamos la función dentro de subscribe.
-      .subscribe(response => {
-
-        // Extraemos los resultados de la respuesta y los guardamos en la variable 'games'.
-        this.games = response.results;
-        this.ordenarPor(this.ordenActual)
+        // ACTUALIZAR IMAGEN AL CAMBIAR DE PLATAFORMA
+        this.actualizarImagenPlataforma(platformId);
         
-      });
-      
-     
+      } else {
+        // Si no hay plataforma, carga los juegos normalmente
+        this.rawgService.getGames(this.currentPage, this.pageSize)
+          .subscribe(response => {
+            this.games = response.results;
+            if (this.ordenActual) {
+              this.ordenarPor(this.ordenActual);
+            }
+          });
+
+        // Si no hay plataforma seleccionada, limpiar la imagen
+        this.selectedPlatformImage = '';
+      }
+    });
   }
 
   buscarJuego(event: any): void {
-    debugger;
     const nombreJuego = event.target.value.trim();
     if (nombreJuego !== '') {
-      this.searching = true; //para hacer que esta en modo busqueda
-      this.ultimabusqueda=nombreJuego;
+      this.searching = true;
+      this.ultimabusqueda = nombreJuego;
       this.rawgService.filterJuego(nombreJuego, this.currentPage).subscribe(response => {
         this.games = response.results;
-        console.log(this.games);
+        if (this.ordenActual) {
+          this.ordenarPor(this.ordenActual);
+        }
       });
     } else {
-      this.ngOnInit() //que se cargue todo de nuevo
+      this.ngOnInit();
     }
   }
 
-  //Otra funcion de buscar la cual le pasamos la busqueda principal que le hemos hecho que lo que hace es que nos guarda el input  de la funcion principal
-  buscarJuegoDirecto(juego:string){
-    this.rawgService.filterJuego(juego,this.currentPage).subscribe(response=>{
-      this.games=response.results
-    })
+  buscarJuegoDirecto(juego: string) {
+    this.rawgService.filterJuego(juego, this.currentPage).subscribe(response => {
+      this.games = response.results;
+      if (this.ordenActual) {
+        this.ordenarPor(this.ordenActual);
+      }
+    });
   }
 
   nextPage(): void {
     this.currentPage++;
-    if (this.searching == false) {
-      this.ngOnInit();
-    }else{
-      this.buscarJuegoDirecto(this.ultimabusqueda)
+    if (!this.searching) {
+      this.rawgService.getGames(this.currentPage, this.pageSize)
+        .subscribe(response => {
+          this.games = response.results;
+          if (this.ordenActual) {
+            this.ordenarPor(this.ordenActual);
+          }
+        });
+    } else {
+      this.buscarJuegoDirecto(this.ultimabusqueda);
     }
-
-
   }
 
   prevPage(): void {
-
     if (this.currentPage > 1) {
       this.currentPage--;
     }
-    if (this.searching == false) {
-      this.ngOnInit();
-    }else{
-      this.buscarJuegoDirecto(this.ultimabusqueda)
+    if (!this.searching) {
+      this.rawgService.getGames(this.currentPage, this.pageSize)
+        .subscribe(response => {
+          this.games = response.results;
+          if (this.ordenActual) {
+            this.ordenarPor(this.ordenActual);
+          }
+        });
+    } else {
+      this.buscarJuegoDirecto(this.ultimabusqueda);
     }
-
-
   }
 
   verDetalles(gamesId: number) {
-    this.router.navigate(["/game", gamesId])
+    this.router.navigate(["/game", gamesId]);
   }
 
   ordenarPor(event: any): void {
-    this.ordenActual = event.value;
-    if (event.target.value === 'nombre') {
-      this.games.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (event.target.value === 'rating') {
-      this.games.sort((a, b) => b.rating - a.rating); 
-    } else if (event.target.value === 'metacritic') {
-      this.games.sort((a, b) => b.metacritic - a.metacritic); 
+    let criterio = event.target ? event.target.value : event;
+    if (criterio !== '') {
+      this.ordenActual = criterio;
+      if (criterio === 'nombre') {
+        this.games.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (criterio === 'rating') {
+        this.games.sort((a, b) => b.rating - a.rating);
+      } else if (criterio === 'metacritic') {
+        this.games.sort((a, b) => b.metacritic - a.metacritic);
+      }
     }
   }
 
+  // 📌 FUNCION PARA ACTUALIZAR LA IMAGEN SEGÚN LA PLATAFORMA
+  actualizarImagenPlataforma(platformId: string) {
+    const platformImages: { [key: string]: string } = {
+      '4': 'https://i.blogs.es/3f45c4/pcpotente-ap/1366_2000.jpeg', // PC
+      '18': 'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/09/ps4-pro-buena.jpg?tf=3840x', // PS4
+      '1': 'https://media.game.es/COVERV2/3D_L/115/115159.png', // Xbox One
+      '7': 'https://m.media-amazon.com/images/I/81IQp9uUdRL._AC_UF894,1000_QL80_.jpg', // Nintendo Switch
+    };
 
-
- 
-
-
+    this.selectedPlatformImage = platformImages[platformId];
+  }
 }
