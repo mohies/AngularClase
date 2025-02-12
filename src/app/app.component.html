@@ -16,6 +16,9 @@
         <li class="nav-item">
           <a class="nav-link text-light custom-link" routerLink="/juegos" routerLinkActive="active">🎮 Juegos</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-light custom-link" routerLink="/contacto" routerLinkActive="active">📧 Contacto</a> <!-- ⬅ Nuevo enlace al formulario de contacto -->
+        </li>
       </ul>
     </div>
   </div>
@@ -26,8 +29,7 @@
   <router-outlet></router-outlet>
 </div>
 
-
 <footer class="bg-dark text-light text-center py-3 mt-4">
   <p class="mb-0">🎮 GameZone - Tu portal de videojuegos | &copy; 2025</p>
-  <p><a  class="text-light">Contacto</a> | <a  class="text-light">Política de privacidad</a></p>
+  <p><a routerLink="/contacto" class="text-light">📩 Contacto</a> | <a class="text-light">Política de privacidad</a></p>
 </footer>

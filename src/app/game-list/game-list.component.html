@@ -33,10 +33,13 @@
     </div>
     }
   </div>
+  @if(!searching){
+    <div class="page-controls">
+      <button class="btn btn-primary" (click)="prevPage()" [disabled]="currentPage === 1">⏮ Anterior</button>
+      <span class="fs-4 mx-3">Página {{ currentPage }}</span>
+      <button class="btn btn-primary" (click)="nextPage()">Siguiente ⏭</button>
+    </div>
 
-  <div class="page-controls">
-    <button class="btn btn-primary" (click)="prevPage()" [disabled]="currentPage === 1">⏮ Anterior</button>
-    <span class="fs-4 mx-3">Página {{ currentPage }}</span>
-    <button class="btn btn-primary" (click)="nextPage()">Siguiente ⏭</button>
-  </div>
+  }
+  
 </div>
