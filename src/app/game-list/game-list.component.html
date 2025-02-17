@@ -1,9 +1,9 @@
 <div class="container mt-4">
-  <!-- 🔍 Input de búsqueda -->
+  <!-- Input de búsqueda -->
   <div class="mb-3 d-flex align-items-center">
     <input type="text" class="form-control me-2" placeholder="🔍 Buscar juegos..." (input)="buscarJuego($event)">
 
-    <!-- 🔄 Selector de Ordenación con opción deshabilitada -->
+    <!--  Selector de Ordenación con opción deshabilitada -->
     <select class="form-select" (change)="ordenarPor($event)">
       <option value="" disabled selected>📌 Selecciona un criterio</option>
       <option value="nombre">🔠 Nombre</option>
@@ -29,7 +29,7 @@
             <p><strong>Metacritic:</strong> <span class="badge bg-success">{{ game.metacritic }}</span></p>
             <p><strong>Valoración:</strong> <span class="badge bg-warning text-dark">⭐ {{ game.rating }}/5</span></p>
             
-            <!-- ⭐ Botón de Favoritos -->
+            <!--  Botón de Favoritos -->
             <button 
               class="btn btn-sm"
               [class.btn-danger]="favorites.has(game.id)"

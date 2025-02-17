@@ -11,7 +11,7 @@ export class FavoriteService {
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
-    const username = 'admin';  // ⚠ Reemplaza con credenciales reales
+    const username = 'admin'; 
     const password = 'admin';
     const encodedCredentials = btoa(`${username}:${password}`);
     return new HttpHeaders({
