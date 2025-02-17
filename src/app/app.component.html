@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-lg custom-navbar bg-dark shadow-lg">
   <div class="container">
-    <!-- Logo -->
-    <a class="navbar-brand text-light fw-bold" href="#">
+    <a class="navbar-brand text-light fw-bold" routerLink="/home">
       <img src="img/logoo.png" alt="GameZone Logo" class="navbar-logo me-2" style="height: 50px;">
       GAMEZONE
     </a>
@@ -17,12 +16,31 @@
           <a class="nav-link text-light custom-link" routerLink="/juegos" routerLinkActive="active">🎮 Juegos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light custom-link" routerLink="/contacto" routerLinkActive="active">📧 Contacto</a> <!-- ⬅ Nuevo enlace al formulario de contacto -->
+          <a class="nav-link text-light custom-link" routerLink="/contacto" routerLinkActive="active">📧 Contacto</a>
         </li>
+
+        <!-- 🔽 MENÚ DESPLEGABLE SOLO SI EL USUARIO ESTÁ AUTENTICADO -->
+        @if (isAuthenticated) {
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              👤 {{ username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" routerLink="/favorites">⭐ Mis Favoritos</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" (click)="logout()">🚪 Cerrar Sesión</a></li>
+            </ul>
+          </li>
+        } @else {
+          <li class="nav-item">
+            <a class="nav-link text-light custom-link" routerLink="/login">🔐 Iniciar Sesión</a>
+          </li>
+        }
       </ul>
     </div>
   </div>
 </nav>
+
 
 <!-- Renderizado dinámico -->
 <div class="container mt-4">
@@ -31,5 +49,4 @@
 
 <footer class="bg-dark text-light text-center py-3 mt-4">
   <p class="mb-0">🎮 GameZone - Tu portal de videojuegos | &copy; 2025</p>
-  <p><a routerLink="/contacto" class="text-light">📩 Contacto</a> | <a class="text-light">Política de privacidad</a></p>
 </footer>

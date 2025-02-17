@@ -10,36 +10,44 @@
       <option value="rating">⭐ Rating</option>
       <option value="metacritic">🎯 Metacritic</option>
     </select>
+  </div>
 
-  </div>
-@if (selectedPlatformImage) {
-  <div class="text-center mb-4">
-    <img [src]="selectedPlatformImage" alt="Plataforma seleccionada" class="platform-image">
-  </div>
-}
+  @if (selectedPlatformImage) {
+    <div class="text-center mb-4">
+      <img [src]="selectedPlatformImage" alt="Plataforma seleccionada" class="platform-image">
+    </div>
+  }
 
   <div class="row">
     @for (game of games; track game.id) {
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-      <div class="card game-card shadow-lg" (click)="verDetalles(game.id)" style="cursor: pointer;">
-        <img [src]="game.background_image" class="card-img-top" alt="{{ game.name }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ game.name }}</h5>
-          <p><strong>Lanzamiento:</strong> {{ game.released }}</p>
-          <p><strong>Metacritic:</strong> <span class="badge bg-success">{{ game.metacritic }}</span></p>
-          <p><strong>Valoración:</strong> <span class="badge bg-warning text-dark">⭐ {{ game.rating }}/5</span></p>
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+        <div class="card game-card shadow-lg">
+          <img [src]="game.background_image" class="card-img-top" alt="{{ game.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ game.name }}</h5>
+            <p><strong>Lanzamiento:</strong> {{ game.released }}</p>
+            <p><strong>Metacritic:</strong> <span class="badge bg-success">{{ game.metacritic }}</span></p>
+            <p><strong>Valoración:</strong> <span class="badge bg-warning text-dark">⭐ {{ game.rating }}/5</span></p>
+            
+            <!-- ⭐ Botón de Favoritos -->
+            <button 
+              class="btn btn-sm"
+              [class.btn-danger]="favorites.has(game.id)"
+              [class.btn-outline-danger]="!favorites.has(game.id)"
+              (click)="toggleFavorite(game)">
+              {{ favorites.has(game.id) ? '❌ Quitar de Favoritos' : '⭐ Añadir a Favoritos' }}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     }
   </div>
+
   @if(!searching){
     <div class="page-controls">
       <button class="btn btn-primary" (click)="prevPage()" [disabled]="currentPage === 1">⏮ Anterior</button>
       <span class="fs-4 mx-3">Página {{ currentPage }}</span>
       <button class="btn btn-primary" (click)="nextPage()">Siguiente ⏭</button>
     </div>
-
   }
-  
 </div>

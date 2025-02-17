@@ -1,0 +1,19 @@
+<div class="container mt-4">
+    <h2>⭐ Mis Favoritos</h2>
+  
+    <ul class="list-group">
+      @for (fav of favorites; track fav.item_id) {
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>🎮 {{ fav.item_name }}</span>
+          <button class="btn btn-danger btn-sm" (click)="removeFavorite(fav.item_id)">
+            ❌ Eliminar
+          </button>
+        </li>
+      }
+    </ul>
+    
+    @if(favorites.length === 0) {
+      <p class="text-muted mt-3">No tienes favoritos aún.</p>
+    }
+  </div>
+  
