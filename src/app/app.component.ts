@@ -43,8 +43,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      this.router.navigate(['/login']); // Redirigir al login después de cerrar sesión
-    });
+    this.authService.logout();
+    this.router.navigate(['/login']); // Redirigir después de logout
   }
 }

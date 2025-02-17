@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RawgService } from '../servicio/rawg.service';
 import { FavoriteService } from '../servicio/favorite.service';
-
+import { AuthService } from '../servicio/auth.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-game-list',
   templateUrl: './game-list.component.html',
@@ -17,17 +18,30 @@ export class GameListComponent implements OnInit {
   ordenActual: string = '';
   selectedPlatformImage: string = '';
   favorites = new Set<number>();
+  
+  isAuthenticated: boolean = false; 
 
   constructor(
-    private rawgService: RawgService, 
-    private router: Router, 
+    private rawgService: RawgService,
+    private router: Router,
     private route: ActivatedRoute,
-    private favoriteService: FavoriteService 
-  ) { }
+    private favoriteService: FavoriteService,
+    private authService: AuthService
+  ) {
+  }
 
   ngOnInit(): void {
     this.cargarJuegos();
-    this.cargarFavoritos();
+    
+    // 🔥 Convertimos el Observable en un valor normal
+    this.authService.isAuthenticated.subscribe(isAuth => {
+      this.isAuthenticated = isAuth; // ⚡ Se actualiza cuando cambia la autenticación
+      if (isAuth) {
+        this.cargarFavoritos();
+      } else {
+        this.favorites.clear(); // Si no está autenticado, se vacía favoritos
+      }
+    });
   }
 
   cargarJuegos(): void {
@@ -93,14 +107,12 @@ export class GameListComponent implements OnInit {
   nextPage(): void {
     this.currentPage++;
     this.cargarJuegos();
-    this.cargarFavoritos();
   }
 
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
       this.cargarJuegos();
-      this.cargarFavoritos();
     }
   }
 
@@ -109,7 +121,13 @@ export class GameListComponent implements OnInit {
   }
 
   ordenarPor(event: any): void {
-    let criterio = event.target ? event.target.value : event;
+    let criterio;
+    if(event.target) {
+      criterio = event.target.value;
+    } else {
+      criterio = event;
+    }
+
     if (criterio !== '') {
       this.ordenActual = criterio;
       if (criterio === 'nombre') {

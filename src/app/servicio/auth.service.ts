@@ -1,51 +1,53 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
-  providedIn: 'root' // Esto hace que el servicio sea global en tu aplicación.
+  providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:8000/api/v1'; // Aquí se encuentra tu API.
+  private apiUrl = 'http://127.0.0.1:8000/api/v1';
 
-  // Creamos un "subject" que mantiene el estado de si el usuario está autenticado.
-  private authStatus = new BehaviorSubject<boolean>(this.loadAuthStatus());
-  isAuthenticated = this.authStatus.asObservable(); // Esto es para que otras partes del código puedan escuchar cambios en el estado de autenticación.
+  private isBrowser: boolean;
+  public authStatus: BehaviorSubject<boolean>;
+  public usernameSubject: BehaviorSubject<string | null>;
 
-  // Creamos un "subject" para almacenar el nombre del usuario.
-  private usernameSubject = new BehaviorSubject<string>(localStorage.getItem('user'));
-  username = this.usernameSubject.asObservable(); // Igual que con la autenticación, otras partes pueden escuchar el nombre de usuario.
+  public isAuthenticated;
+  public username;
 
   constructor(
-    private http: HttpClient,  // Para hacer peticiones HTTP
-    @Inject(PLATFORM_ID) private platformId: Object // Esto nos permite saber si estamos en el navegador o en el servidor.
-  ) { }
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+    const storedUser = this.isBrowser ? localStorage.getItem('user') : null;
 
-  // Método para loguear al usuario. Hace una petición HTTP al backend.
-  login(username: string, password: string) {
-    return this.http.post<any>(`${this.apiUrl}/login/`, { username, password }).subscribe(response => {
-      if (isPlatformBrowser(this.platformId)) {
-        // Solo guardamos los datos del usuario en localStorage si estamos en el navegador.
-        localStorage.setItem('user', JSON.stringify(response));
-      }
-      this.authStatus.next(true); // Cambiamos el estado de autenticación a 'true'.
-      this.usernameSubject.next(response.username); // Guardamos el nombre de usuario.
-    });
+    this.authStatus = new BehaviorSubject<boolean>(!!storedUser);
+    this.isAuthenticated = this.authStatus.asObservable();
+
+    this.usernameSubject = new BehaviorSubject<string | null>(storedUser ? JSON.parse(storedUser).username : null);
+    this.username = this.usernameSubject.asObservable();
   }
 
-  // Método para cerrar sesión. Limpia el almacenamiento local.
-  logout() {
-    // Realiza la solicitud HTTP de logout
-    return this.http.post<any>(`${this.apiUrl}/logout/`, {}).subscribe(() => {
-      if (isPlatformBrowser(this.platformId)) {
-        // Solo eliminamos los datos de localStorage si estamos en el navegador.
-        localStorage.removeItem('user');
-      }
-      this.authStatus.next(false); // Cambiamos el estado de autenticación a 'false'.
-      this.usernameSubject.next(null); // Limpiamos el nombre de usuario.
-    });
+
+  login(username: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login/`, { username, password });
   }
 
+
+  logout(): void {
+    this.http.post<any>(`${this.apiUrl}/logout/`, {}).subscribe({
+      next: () => {
+        if (this.isBrowser) {
+          localStorage.removeItem('user');
+        }
+        this.authStatus.next(false);
+        this.usernameSubject.next(null);
+      },
+      error: (err) => {
+        console.error("Error en logout:", err);
+      }
+    });
+  }
 }
